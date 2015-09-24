@@ -1,0 +1,42 @@
+{% include "belleville/header.html" %}
+{% load staticfiles %}
+
+<center>
+<div id="container">
+  <div id="content">
+
+<table cellpadding="5"><tr valign="top">
+<td>
+  <div id="twitter_div">
+    <p><img src="{% static 'belleville/images/GAPdr_small.jpg' %}"></p>
+    <a href="http://mechanicalgirl.com/pages/resume/">resume</a><br />
+    <a href="https://gitlab.com/u/mechanicalgirl">GitLab</a><br />
+    <a href="https://github.com/mechanicalgirl">GitHub</a><br />
+    <a href="https://people.djangoproject.com/bshaurette/">django people</a><br />
+    <a href="http://www.linkedin.com/in/barbarashaurette" target="_blank">linkedin</a><br>
+    <a href="http://twitter.com/bshaurette" target="_blank">twitter</a><br>
+    <a href="https://www.flickr.com/photos/barbarashaurette/" target="_blank">flickr</a><br>
+  </div>
+</td>
+
+<td>
+    {% load sidebar_tags %}
+    {% sidebar_category_list %}
+</td>
+
+<td>
+  <div id="twitter_div">
+    <center>
+      <a href="http://twitter.com/bshaurette"><img src="{% static 'belleville/images/twitter-bird.jpg' %}"></a>
+    </center>
+    <a class="twitter-timeline" data-dnt=true href="https://twitter.com/bshaurette" data-widget-id="260210499512307712">Tweets by @bshaurette</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+</td>
+
+</tr></table>
+
+</div>
+</div>
+</center>
+
+{% include "belleville/footer.html" %}

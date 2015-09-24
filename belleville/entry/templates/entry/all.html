@@ -1,0 +1,25 @@
+{% include "belleville/header.html" %}
+{% include "entry/header.html" %}
+
+{% if entry_list %}
+    <div class="entry_box">
+        <table cellpadding="3">
+        <tr valign="top">
+            <td>Title</td>
+            <td>Date Posted</td>
+            <td>Last Updated</td>
+            <td>Category</td>
+        </tr>
+        {% for entry in entry_list %}
+	    <tr valign="top">
+	    <td nowrap><a href="/post/{{ entry.slug }}/">{{ entry.title }}</a></td>
+	    <td nowrap><a href="/date/{{ entry.created_at|date:"Y-m-d" }}/">{{ entry.created_at|date:"M d, Y" }}</a></td>
+            <td nowrap><a href="/date/{{ entry.updated_at|date:"Y-m-d" }}/">{{ entry.updated_at|date:"M d, Y" }}</a></td>
+	    <td nowrap>{% for category in entry.category_list %} <a href="/category/{{ category|slugify }}/">{{ category }}</a>{% endfor %}</td>
+	    </tr>
+        {% endfor %}
+	</table>
+    </div>
+{% else %}
+    No entries available.<br />
+{% endif %}

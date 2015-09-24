@@ -1,0 +1,43 @@
+{% include "belleville/header.html" %}
+{% include "entry/header.html" %}
+
+<center>
+<div id="container">
+  <div id="content">
+
+    {% if entry %}
+
+      {% if user.is_superuser and user.is_staff %}
+        <p><a href="/admin/entry/post/{{ entry.id }}/">EDIT THIS POST</a></p>
+      {% endif %}
+      <div class="entry_box">
+        <h1 class="post_title">{{ entry.title }}</h1>
+        <div class="post_signature">
+            Posted by: <a href="/author/{{ entry.author }}/">{{ entry.author }}</a> | 
+            Date: <a href="/date/{{ entry.created_at|date:"Y-m-d" }}/">{{ entry.created_at|date:"M d, Y" }}</a> | 
+            {% if entry.updated_at %}
+                Updated: <a href="/date/{{ entry.updated_at|date:"Y-m-d" }}/">{{ entry.updated_at|date:"M d, Y" }}</a> |
+            {% endif %}
+            Category: 
+            {% for category in entry.category_list %}
+                <a href="/category/{{ category|slugify }}/">{{ category }}</a>
+            {% endfor %}
+
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="bshaurette">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+        </div>
+        <div class="post_body">{% autoescape off %}{{ entry.body }}{% endautoescape %}</div>
+      </div>
+
+{% else %}
+
+    Sorry, nothing to see here.<br />
+
+{% endif %}
+
+  </div>
+</div>
+</center>
+
+{% include "belleville/footer.html" %}

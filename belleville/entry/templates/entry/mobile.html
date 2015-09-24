@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>
+        Mechanical Girl
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'belleville/css/style.css' %}" />
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="page0" data-theme="d">
+
+  <div data-role="header">
+    <h1>Home</h1>
+  </div><!-- /header -->
+
+  <div data-role="content">	
+    {% if entry_list %}
+      <ul data-role="listview" data-inset="true" data-filter="false">
+      {% for entry in entry_list %}
+        <li><a href="#{{ entry.slug }}">{{ entry.title }}</a></li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    <!-- <p><a href="/?m">Click here to view this page on the regular site</a></p> -->
+
+    </div><!-- /content -->
+
+    <div data-role="footer" data-theme="d">
+      <div data-role="navbar">
+        <ul>
+	  <li><a href="#page0">HOME</a></li>
+	  <li><a href="#page1">ABOUT</a></li>
+	  <li><a href="#page2">CV</a></li>
+        </ul>
+      </div><!-- /navbar -->
+    </div><!-- /footer -->
+
+    <center>
+      <p>
+        <a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django"></a>
+      </p>
+    </center>
+
+  </div><!-- /page -->
+
+{% if entry_list %}
+  {% for entry in entry_list %}
+  <div data-role="page" id="{{ entry.slug }}" data-theme="d">
+
+    <div data-role="header">
+      <h1>{{ entry.title }}</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">
+      Date: <a href="/date/{{ entry.created_at|date:"Y-m-d" }}/">{{ entry.created_at|date:"M d, Y" }}</a>
+      {% autoescape off %}{{ entry.body }}{% endautoescape %}
+      <!-- <a href="/post/{{ entry.slug }}/?m">Click here to view this page on the regular site</a><br> -->
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="bshaurette">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div><!-- /content -->
+
+    <div data-role="footer" data-theme="d">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#page0">HOME</a></li>
+          <li><a href="#page1">ABOUT</a></li>
+          <li><a href="#page2">CV</a></li>
+        </ul>
+      </div><!-- /navbar -->
+    </div><!-- /footer -->
+
+    <center>
+      <p>
+        <a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django"></a>
+      </p>
+    </center>
+
+  </div><!-- /page -->
+  {% endfor %}
+{% endif %}
+
+	
+  <div data-role="page" id="page1" data-theme="d">
+    <div data-role="header">
+      <h1>About</h1>
+    </div><!-- /header -->
+	
+    <div data-role="content">
+	<table cellspacing="20"><tr valign="top">
+	<td>
+		<p>
+		<img src="http://mechanicalgirl.com/site_media/images/GAPdr_small.jpg"><br />
+		<a href="http://mechanicalgirl.com/pages/resume/">resume</a><br/>
+		<a href="https://people.djangoproject.com/bshaurette/">django people</a><br/>
+		<a href="http://www.linkedin.com/in/barbarashaurette">linkedin</a><br/>
+		<a href="http://twitter.com/bshaurette">twitter</a><br/>
+		<a href="http://www.flickr.com/photos/bloodredrose/">flickr</a><br/>
+		<a href="http://readernaut.com/bshaurette/">readernaut</a><br/>
+		</p>
+	</td>
+	<td>
+		<p>
+		<b>Blogs I read:</b><br>
+		<a href="http://juliaelman.com/blog/">Julia Elman</a><br />
+		<a href="http://www.eflorenzano.com/">Die in a Fire</a><br/>
+		<a href="http://simonwillison.net/">Simon Willison</a><br/>
+		<a href="http://therealkatie.net">The Real Katie</a><br/>
+		<a href="http://www.zedshaw.com/">Zed Shaw</a><br/>
+		<a href="http://girldeveloper.com/">Girl Developer</a><br/>
+		</p>
+	</td>
+	</tr><tr>
+	<td colspan="2">
+		<p>
+		<a href="http://twitter.com/bshaurette"><img src="http://mechanicalgirl.com/site_media/images/twitter-bird.jpg" align="left"></a><br />
+		<div id="twitter_update_list"></div>
+		</p>
+		<!-- <p><a href="/pages/about/?m">Click here to view this page on the regular site</a></p> -->
+	</td></tr>
+	</table>
+      </div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page0">HOME</a></li>
+				<li><a href="#page1">ABOUT</a></li>
+				<li><a href="#page2">CV</a></li>
+			</ul>
+		</div><!-- /navbar -->
+
+		<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+		<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/bshaurette.json?callback=twitterCallback2&amp;count=1"></script>
+	
+	</div><!-- /footer -->
+	<center><p><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django"></a></p></center>
+  </div><!-- /page -->
+
+	<div data-role="page" id="page2" data-theme="d">
+	
+	<div data-role="header">
+	<h1>Resume</h1>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	<h3>Barbara Shaurette</h3>
+	<table>
+	<tr valign="top"><td>Location</td><td>Austin, Texas</td></tr>
+	<tr valign="top"><td>Email</td><td>barbara.shaurette@gmail.com</td></tr>
+	<tr valign="top"><td>Website</td><td><a href="http://www.mechanicalgirl.com/">http://www.mechanicalgirl.com/</a></td></tr>
+	<tr valign="top"><td>LinkedIn</td><td><a href="http://www.linkedin.com/in/barbarashaurette/">http://www.linkedin.com/in/barbarashaurette/</a></td></tr>
+	<tr valign="top"><td>Other</td><td><a href="https://people.djangoproject.com/bshaurette/">https://people.djangoproject.com/bshaurette/</a></td></tr>
+	</table><br />
+	<h3>What I'm interested in:</h3>
+	<p>A position that incorporates application design and development, database design and development, and scripting in a Python-focused environment.  I'm looking for the opportunity to do work that involves data analysis and reporting - I have some experience already, and that's the direction I'd like to continue in.  I'm also interested in putting my project management skills to work in an engineering leadership role.</p>
+	<p></p>
+	<h3>What I'm good at:</h3>
+	<p>
+	<ul>
+	<li>Python/Django, PHP/Zend Framework</li>
+	<li>Databases: MySQL, Postgres</li>
+	<li>Linux/Unix, OS X</li>
+	<li>Version control: svn, git, mercurial</li>
+	<li>Writing documentation, including requirements and specifications</li>
+	<li>Analysis and troubleshooting</li>
+	<li>Learning new languages and tools</li>
+	</ul>
+	</p>
+	<p></p>
+
+	<h3>Why I'm good at it:</h3>
+	<span class="sub-indent">Active side projects:</span><br>
+	<span class="sub-sub-indent"><a href="http://www.mechanicalgirl.com/">http://www.mechanicalgirl.com/</a> (Python/Django)</span><br>
+	<span class="sub-sub-indent"><a href="http://www.fivesongsdaily.com/">http://www.fivesongsdaily.com/</a> (Python/Django) (test account available upon request)</span><br>
+	<p></p>
+
+	<span class="sub-indent">Github projects and code samples:</span><br>
+	<span class="sub-sub-indent"><a href="http://github.com/mechanicalgirl">http://github.com/mechanicalgirl</a></span><br>
+	<span class="sub-sub-indent"><a href="https://github.com/jnoller/PythonSecretSanta">https://github.com/jnoller/PythonSecretSanta</a></span><br>
+        <span class="sub-sub-indent"><a href="http://resume.github.com/?mechanicalgirl">http://resume.github.com/?mechanicalgirl</a></span><br>
+	<p></p>
+
+	<span class="sub-indent">Conferences and Training:</span><br>
+	<span class="sub-sub-indent">DjangoCon 2008/2009/2010/2011/2012</span><br>
+	<span class="sub-sub-indent">PyCon 2009/2010/2012/2013</span><br>
+        <span class="sub-sub-indent">PDX Python Workshop mentor</span><br>
+        <span class="sub-sub-indent">PyCon 2013 - Young Coders tutorials, instructor</span><br>
+        <span class="sub-sub-indent">Austin Women's Python workshops, instructor</span><br>
+	<p></p>
+
+        <span class="sub-indent">Organizations</span><br>
+        <span class="sub-sub-indent"><b>Python Software Foundation</b> (April 2013 to Present)</span><br>
+        <span class="sub-sub-indent"><span class="sub-sub-indent">Member</span></span><br>
+        <span class="sub-sub-indent"><b>Computer Science Teachers Association</b> (September 2012 to Present)</span><br>
+        <span class="sub-sub-indent"><span class="sub-sub-indent">Industry advocate, helping to mentor students and develop primary/high school CS curriculum</span></span><br>
+        <span class="sub-sub-indent"><b>PyLadies</b> (November 2012 to Present)</span><br>
+        <span class="sub-sub-indent"><span class="sub-sub-indent">Founder, Austin chapter</span></span><br>
+        <p></p>
+
+	<b>Employment History</b>
+
+        <p>
+        10/2012 - 04/2013<br>
+        Texas Tribune<br>
+        <b>Software Engineer</b>: Python/Django and PostgreSQL/MySQL work on data applications that illustrate the workings of such institutions as the Texas state legislature and prison system for TexasTribune.org.<br>
+        </p>
+
+	<p>
+	11/2008 - 09/2012<br>
+	Live Nation Merchandise<br>
+	<b>Senior Software Engineer</b>: PHP, Python, Django and MySQL work on high-profile, high-traffic sites for artists such as U2, KISS, and Madonna (including CMS, media processing, reporting tools); API development; database design and management; dev/ops (release management, internal environment administration)<br>
+	</p>
+
+	<p>
+	11/2007 - 11/2008<br>
+	Tippit, Inc.<br>
+	<b>Senior Software Engineer</b>: Development work on ETL, internal CRM and business intelligence tools, and restructuring of the data warehouse - this work involved Python, Django, PHP, mySQL and other related technologies<br>
+	<p>
+	07/2007 - 11/2007<br>
+	Live Nation Merchandise<br>
+	<b>Senior Software Engineer</b>: Rewrite of the ecommerce site (in XCode/WebObjects), and development/maintenance of artist web sites - this work involved PHP, MySQL, and a significant amount of shell scripting<br>
+	</p>
+	<p>
+	03/2007 - 06/2007<br>
+	Live Nation Entertainment<br>
+	<b>Senior Applications Developer</b>: Development and support on the event search site, Zend Framework upgrade for internationalization and cacheing - this work involved PHP and MySQL, XML/XSLT, and some C++<br>
+	</p>
+	<p>
+	03/2004 - 03/2007<br>
+	Adteractive, Inc.<br>
+	<b>Senior Applications Developer</b>: Platform engineering/data warehousing, ETL, development on our PHP framework, APIs for Java validation service, coordinating the release of new PHP applications<br>
+	<b>Team Lead/Application Development</b>: Managed developer teams through build/launch/maintenance cycles<br>
+	<b>Application Developer</b>: Writing data models to evaluate and transfer transaction data - most of this work was in Perl and MySQL<br>
+	</p>
+	<p>
+	07/2003 - 03/2004<br>
+	Self-employed<br>
+	General web development work, contract web design/development for local clients, primarily using HTML, JavaScript and CSS<br>
+	</p>
+	<p>
+	07/1999 - 07/2003<br>
+	Vivendi/Universal Inc.<br>
+	<b>Game Producer/Developer</b>: Writing original game engines for online casual and casino games, primarily in Flash/ActionScript, with some Java work.  Developed and supported a network of gaming web sites.<br>
+	<b>Web Developer</b>: Development and support of Berkeley Systems and Sierra Online gaming sites.  Most of this was front-end work - HTML/CSS and JavaScript (with some ColdFusion).<br>
+	<p></p>
+	<p><b>References and Recommendations</b></p>
+	<p>References are available upon request.  A number of professional recommendations can also be found on my LinkedIn profile: <a href="http://www.linkedin.com/in/barbarashaurette">http://www.linkedin.com/in/barbarashaurette</a></p>
+	<p></p>
+	<p>Last updated: September 18, 2012</p>
+
+        <!-- <p><a href="/pages/resume/?m">Click here to view this page on the regular site</a></p> -->
+
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+	<div data-role="navbar">
+	<ul>
+	<li><a href="#page0">HOME</a></li>
+	<li><a href="#page1">ABOUT</a></li>
+	<li><a href="#page2">CV</a></li>
+	</ul>
+	</div><!-- /navbar -->
+	</div><!-- /footer -->
+	<center><p><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django"></a></p></center>
+	</div><!-- /page -->
+
+
+	{% if entry_list %}
+	{% for entry in entry_list %}
+	<div data-role="page" id="post{{ entry.id }}" data-theme="d">
+	<div data-role="content">
+	<h1 class="post_title"><a href="/post/{{ entry.slug }}/">{{ entry.title }}</a></h1>
+	Date: <a href="/date/{{ entry.created_at|date:"Y-m-d" }}/">{{ entry.created_at|date:"M d, Y" }}</a> | 
+	{% if entry.updated_at %}
+	  Updated: <a href="/date/{{ entry.updated_at|date:"Y-m-d" }}/">{{ entry.updated_at|date:"M d, Y" }}</a> |
+	{% endif %}
+	Category:
+	{% for category in entry.category_list %}
+	  <a href="/category/{{ category|slugify }}/">{{ category }}</a>
+	{% endfor %}
+	<p>{% autoescape off %}{{ entry.body|truncatewords:50 }}{% endautoescape %}</p>
+	<a href="/post/{{ entry.slug }}/">Read More</a>
+	</div><!-- /content -->
+	<div data-role="footer" data-theme="d">
+	<div data-role="navbar">
+	<ul>
+	<li><a href="#page0">HOME</a></li>
+	<li><a href="#page1">ABOUT</a></li>
+	<li><a href="#page2">CV</a></li>
+	</ul>
+	</div><!-- /navbar -->
+	</div><!-- /footer -->
+	<center><p><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django"></a></p></center>
+	</div><!-- /page -->
+	{% endfor %}
+	{% endif %}
+
+</body>
+</html>

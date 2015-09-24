@@ -1,0 +1,5 @@
+*.pyc
+belleville-env
+.DS_Store
+db.sqlite3
+settings.py

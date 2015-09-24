@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+<center>
+<div id="footer">
+
+  <div id="footer-item">
+    <a href="http://www.djangopony.com/" target="new" title="Magic! Ponies! Django! Whee!">
+        <img src="{% static 'belleville/images/badge.png' %}" width="210" height="65" alt="ponybadge"></a>
+  </div>
+  <div id="footer-item">
+    <a href="http://www.djangoproject.com/" target="new">
+        <img src="{% static 'belleville/images/djangopowered126x54.gif' %}" border="0" alt="Powered by Django." title="Powered by Django." /></a>
+  </div>
+  <div id="footer-item">
+    <a href="http://www.pyladies.com/" target="new">
+        <img src="{% static 'belleville/images/face_sticker_100.jpg' %}" border="0" alt="PyLadies" title="PyLadies" /></a>
+  </div>
+  <div id="footer-item">
+    <a href="https://djangogirls.org/" target="new">
+        <img src="{% static 'belleville/images/djangogirls_logo_square.png' %}" width="150" height="150" alt="DjangoGirls"></a>
+  </div>
+  <div class="clear"></div>
+
+</div>
+</center>
+
+{% if user.is_superuser and user.is_staff %}
+  <a href="/admin/">ADMIN</a>
+{% endif %}

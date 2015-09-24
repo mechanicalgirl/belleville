@@ -1,0 +1,53 @@
+{% include "belleville/header.html" %}
+{% include "entry/header.html" %}
+
+<center>
+<div id="container">
+    <div id="content">
+
+    {% if entry_list %}
+        {% for entry in entry_list %}
+        <div class="entry_box">
+            <h1 class="post_title"><a href="/post/{{ entry.slug }}/">{{ entry.title }}</a></h1>
+            <div class="post_signature">
+                Posted by: <a href="/author/{{ entry.author }}/">{{ entry.author }}</a> | 
+                Date: <a href="/date/{{ entry.created_at|date:"Y-m-d" }}/">{{ entry.created_at|date:"M d, Y" }}</a> |
+                {% if entry.updated_at %}
+                    Updated: <a href="/date/{{ entry.updated_at|date:"Y-m-d" }}/">{{ entry.updated_at|date:"M d, Y" }}</a> |
+                {% endif %}
+                Category: 
+                {% for category in entry.category_list %}
+                    <a href="/category/{{ category|slugify }}/">{{ category }}</a>
+                {% endfor %} 
+            </div>
+            <div class="post_preview">
+                {% load preview_filters %}
+                {% if entry.body|contains:"<notruncate>" %}
+                  {% autoescape off %}{{ entry.body }}{% endautoescape %}<br /><br />
+                {% else %}
+                  {% autoescape off %}{{ entry.body|truncatewords:50 }}{% endautoescape %}<br /><br />
+                {% endif %}
+
+                <a href="/post/{{ entry.slug }}/">Read More</a>
+        	{% if user.is_superuser and user.is_staff %}
+            	     | <a href="/admin/entry/post/{{ entry.id }}/">EDIT THIS POST</a>
+        	{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        No entries available.<br />
+    {% endif %}
+
+    <div class="pagination" align="center">
+        {% for page in page_range %}
+            <a href="/{% if category %}category/{{ category }}/{% endif %}{% if author %}author/{{ author }}/{% endif %}{% if date %}date/{{ date }}/{% endif %}?page={{ page }}">{{ page }}</a>
+        {% endfor %}
+    </div>
+
+    </div>
+</div>
+</center>
+
+{% include "belleville/footer.html" %}
